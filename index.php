@@ -1,14 +1,29 @@
 <?php
-require_once ('src/DemoSeeder.php');
-require_once ('src/OST.php');
+require_once('src/DemoSeeder.php');
+require_once('src/OST.php');
+
+// Debugging statements
+var_dump($_GET['ost_id']);
+var_dump(DemoSeeder::seed());
+
+// Error checking for ost_id parameter
+$ostId = isset($_GET['ost_id']) ? htmlspecialchars($_GET['ost_id']) : null;
 
 $demos = DemoSeeder::seed();
 
-//var_dump($demos);
+// Debugging statement
+var_dump($demos);
 
-//echo $demos[0]->getId();
+// Filter demos based on the ost_id parameter
+$selectedDemo = null;
+if ($ostId !== null && array_key_exists($ostId, $demos)) {
+    $selectedDemo = $demos[$ostId];
+}
 
-
-echo htmlspecialchars($_GET['ost_id']);
-
-echo json_encode($demos);
+// Output JSON for the selected OST or an error message if not found
+if ($selectedDemo !== null) {
+    echo json_encode($selectedDemo);
+} else {
+    echo json_encode(['error' => 'OST not found']);
+}
+?>
