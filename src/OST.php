@@ -101,6 +101,18 @@ class OST{
     {
         $this->tracklist = $tracklist;
     }
+
+    public function jsonSerialize(): mixed
+    {
+        return array(
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "videogame name" => $this->getVgname(),
+            "release year" => $this->getYear(),
+            "tracklist" => $this->getTracklist(),
+        );
+    }
+
 }
 
 class Song{
