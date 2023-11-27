@@ -1,29 +1,26 @@
 <?php
-require_once('src/DemoSeeder.php');
-require_once('src/OST.php');
+require_once ('src/DemoSeeder.php');
+require_once ('src/OST.php');
 
-// Debugging statements
-var_dump($_GET['ost_id']);
-var_dump(DemoSeeder::seed());
-
-// Error checking for ost_id parameter
-$ostId = isset($_GET['ost_id']) ? htmlspecialchars($_GET['ost_id']) : null;
+header("Content-Type: application/json");
 
 $demos = DemoSeeder::seed();
 
-// Debugging statement
-var_dump($demos);
+//var_dump($demos);
 
-// Filter demos based on the ost_id parameter
-$selectedDemo = null;
-if ($ostId !== null && array_key_exists($ostId, $demos)) {
-    $selectedDemo = $demos[$ostId];
+//echo $demos[0]->getId();
+
+
+//echo htmlspecialchars($_GET['ost_id']);
+$gesuchteOst = ($_GET['ost_id']);
+//echo $gesuchteOst;
+
+
+
+for ($i = 0; $i < count($demos); $i++) {
+    if ($gesuchteOst == $demos[$i]-> getId()){
+        echo json_encode($demos[$i]);
+         //var_dump($demos[$i]);
+    }
 }
 
-// Output JSON for the selected OST or an error message if not found
-if ($selectedDemo !== null) {
-    echo json_encode($selectedDemo);
-} else {
-    echo json_encode(['error' => 'OST not found']);
-}
-?>
