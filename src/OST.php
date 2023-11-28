@@ -1,4 +1,5 @@
 <?php
+
 class OST implements JsonSerializable
 {
     private $id;
@@ -103,6 +104,7 @@ class OST implements JsonSerializable
         $this->tracklist = $tracklist;
     }
 
+    //hier wird sozusagen ein eigenes Json "Format" definiert, das mixed steht für die Art des Rückgabewertes, in diesem fall kann dieser beliebig sein
     public function jsonSerialize(): mixed
     {
         return array(

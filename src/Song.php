@@ -1,5 +1,7 @@
 <?php
-class Song implements JsonSerializable {
+
+class Song implements JsonSerializable
+{
     private $uid;
     private $sname;
     private $artist;
@@ -102,6 +104,7 @@ class Song implements JsonSerializable {
         $this->duration = $duration;
     }
 
+    //hier wird sozusagen ein eigenes Json "Format" definiert, das mixed steht für die Art des Rückgabewertes, in diesem fall kann dieser beliebig sein
     public function jsonSerialize(): mixed
     {
         return array(
